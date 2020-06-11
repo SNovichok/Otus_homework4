@@ -1,0 +1,20 @@
+language: cpp
+before_script:
+#- sudo apt-get install libboost-test-dev -y
+- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
+- sudo apt-get update -qq
+script:
+- cmake .
+- cmake --build .
+#- cmake --build . --target test
+- cmake --build . --target package
+deploy:
+  provider: script
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  #  Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
+  script:
+  - curl -T homework4-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -usnovichok:$BINTRAY_API_KEY "https://api.bintray.com/content/snovichok/ohw4/hw4/$TRAVIS_BUILD_NUMBER/homework4-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  

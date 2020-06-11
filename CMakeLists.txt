@@ -6,12 +6,12 @@ else()
 set(VERSION_NUMBER "0.0.$ENV{TRAVIS_BUILD_NUMBER}")
 endif()
 
-project(homework2 VERSION ${VERSION_NUMBER})
+project(PrintIP VERSION ${VERSION_NUMBER})
 
 add_executable(print_ip main.cpp)
 
 set_target_properties(
-    printIP PROPERTIES
+    print_ip PROPERTIES
     CXX_STANDART 17
     CXX_STANDART_REQUIRED ON
     )

@@ -1,6 +1,12 @@
 cmake_mnimum_required(VERSION 3.2)
 
-project(printIP VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if("$ENV{TRAVIS_BUILD_NUMBER}" STREQUAL "")
+set(VERSION_NUMBER "0.0.1")
+else()
+set(VERSION_NUMBER "0.0.$ENV{TRAVIS_BUILD_NUMBER}")
+endif()
+
+project(homework2 VERSION ${VERSION_NUMBER})
 
 add_executable(print_ip main.cpp)
 
